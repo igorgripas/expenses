@@ -1,8 +1,8 @@
-import {User} from '../user.model';
 import * as AuthActions from './auth.actions';
+import {UserInfo} from "firebase";
 
 export interface State {
-  user: User;
+  user: UserInfo;
 }
 
 const initialState: State = {
@@ -18,7 +18,7 @@ export function authReducer(state: State = initialState, action: AuthActions.Aut
       };
     }
     case AuthActions.AUTHENTICATE_SUCCESS: {
-      const user = new User(action.payload.email, action.payload.userId, action.payload.token, action.payload.expirationDate);
+      const user = {...action.payload};
       return { ... state, user, authError: null, loading: false} ;
     }
     default:
