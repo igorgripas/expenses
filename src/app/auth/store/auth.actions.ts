@@ -2,9 +2,8 @@ import {Action} from '@ngrx/store';
 import {UserInfo} from "firebase";
 
 export const AUTHENTICATE_SUCCESS = '[Auth] authenticate success';
-export const LOGOUT = '[Auth] logout';
-
-export const AUTO_LOGIN = '[Auth] auto login';
+export const LOGOUT_START = '[Auth] logout start';
+export const LOGOUT_SUCCESS = '[Auth] logout success';
 
 export class AuthenticateSuccess implements Action {
   readonly type = AUTHENTICATE_SUCCESS;
@@ -12,14 +11,15 @@ export class AuthenticateSuccess implements Action {
   constructor(public payload: UserInfo) {}
 }
 
-export class Logout implements Action {
-  readonly type = LOGOUT;
+export class LogoutStart implements Action {
+  readonly type = LOGOUT_START;
 }
 
-export class AutoLogin implements Action {
-  readonly type = AUTO_LOGIN;
+export class LogoutSuccess implements Action {
+  readonly type = LOGOUT_SUCCESS;
 }
+
 
 export type AuthActions = AuthenticateSuccess
-  | Logout
-  | AutoLogin;
+  | LogoutStart
+  | LogoutSuccess;

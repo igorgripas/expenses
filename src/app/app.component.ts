@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import * as firebase from "firebase";
 import {AppState} from "./store/app.reducer";
 import {Store} from "@ngrx/store";
-import {AuthenticateSuccess, Logout} from "./auth/store/auth.actions";
+import {AuthenticateSuccess, LogoutStart, LogoutSuccess} from "./auth/store/auth.actions";
 import {AngularFireAuth} from "@angular/fire/auth";
 
 @Component({
@@ -18,11 +18,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.afAuth.authState.subscribe(user => {
-      console.log('onAuthChanged', user);
       if (user) {
         this.store.dispatch(new AuthenticateSuccess(user));
       } else {
-        this.store.dispatch(new Logout());
+        this.store.dispatch(new LogoutSuccess());
       }
       this.user = user
     });
